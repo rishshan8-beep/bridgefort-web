@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Bridgefort - Join Our Talent Network</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap & Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: #f8f9fa;
+        }
+
+        .form-container {
+            background: #fff;
+            border-radius: 18px;
+            padding: 40px;
+            max-width: 650px;
+            margin: 50px auto;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .file-box {
+            border: 2px dashed #d4d4d4;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            background: linear-gradient(to right, #d19b21, #24b476);
+            color: #fff;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .invalid-feedback {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="form-container">
+
+        <h3 class="text-center fw-bold mb-3">Join Our Global Talent Network</h3>
+        <p class="text-center text-muted mb-4">Submit your details and let us connect you with amazing opportunities worldwide</p>
+
+        <form id="talentForm">
+
+            <!-- Full Name -->
+            <div class="mb-3">
+                <label class="form-label">Full Name <span class="text-danger">*</span></label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa fa-user"></i></span>
+                    <input type="text" class="form-control" placeholder="Enter your full name" required>
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+                <label class="form-label">Email Address <span class="text-danger">*</span></label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                    <input type="email" class="form-control" placeholder="your.email@example.com" required>
+                </div>
+            </div>
+
+            <!-- Phone -->
+            <div class="mb-3">
+                <label class="form-label">Phone Number <span class="text-danger">*</span></label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <img src="https://flagcdn.com/16x12/gb.png" alt="UK flag">
+                    </span>
+                    <select class="form-select" style="max-width: 120px;">
+                        <option>+44</option>
+                    </select>
+                    <input type="text" class="form-control" placeholder="+447712345678" required>
+                </div>
+            </div>
+
+            <!-- Age Group -->
+            <div class="mb-3">
+                <label class="form-label">Age Group <span class="text-danger">*</span></label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa fa-cake-candles"></i></span>
+                    <select class="form-select" required>
+                        <option value="">Select your age group</option>
+                        <option>17-20</option>
+                        <option>21-29</option>
+                        <option>30-49</option>
+                        <option>50-75</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Preferred Job Type -->
+            <div class="mb-3">
+                <label class="form-label">Preferred Job Type <span class="text-danger">*</span></label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa fa-briefcase"></i></span>
+                    <select class="form-select" required>
+                        <option value="">Select job type</option>
+                        <option>Full-Time</option>
+                        <option>Part-Time</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Upload CV -->
+            <div class="mb-4">
+                <label class="form-label">Upload Your CV <span class="text-muted">(Optional)</span></label>
+                <label class="file-box w-100">
+                    <i class="fa fa-file-lines fa-2x mb-2 text-secondary"></i>
+                    <p class="mb-0 fw-semibold">Choose file or drag & drop</p>
+                    <small class="text-muted">PDF, DOC, DOCX, RTF (Max 5MB)</small>
+                    <input type="file" hidden>
+                </label>
+            </div>
+
+            <!-- Submit -->
+            <div class="text-center">
+                <button type="submit" class="submit-btn">Submit Application 🚀</button>
+            </div>
+
+        </form>
+
+    </div>
+
+    <!-- JS Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('talentForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            let form = e.target;
+            let valid = true;
+
+            form.querySelectorAll('input[required], select[required]').forEach(function (field) {
+                if (!field.value) {
+                    valid = false;
+                    field.classList.add('is-invalid');
+                    if (!field.nextElementSibling || !field.nextElementSibling.classList.contains('invalid-feedback')) {
+                        let error = document.createElement('div');
+                        error.className = 'invalid-feedback';
+                        error.innerText = 'Please fill out this field';
+                        field.parentNode.appendChild(error);
+                    }
+                } else {
+                    field.classList.remove('is-invalid');
+                    if (field.nextElementSibling && field.nextElementSibling.classList.contains('invalid-feedback')) {
+                        field.nextElementSibling.remove();
+                    }
+                }
+            });
+
+            if (valid) {
+                // Success message inside the form
+                const successMsg = document.createElement('div');
+                successMsg.className = 'alert alert-success mt-3';
+                successMsg.innerText = 'Form submitted successfully! 🚀';
+                form.appendChild(successMsg);
+
+                form.reset();
+
+                // Remove success message after 3 seconds
+                setTimeout(() => successMsg.remove(), 3000);
+            }
+        });
+    </script>
+
+</body>
+</html>
